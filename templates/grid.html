@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load helpers %}
+{% block navigation %}
+    {% include "navigation.html" with menu_item='bikes'%}
+{% endblock %}
+
+{% block content %}
+
+            <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-1-1">
+                    <h1 class="uk-heading-large">Fix bicycles</h1>
+                    <p class="uk-text-large">At this moment we have {{ items|count }} awesome fixes!</p>
+                </div>
+            </div>
+
+            <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-1-1">
+
+
+                    <ul id="switcher-content" class="uk-switcher">
+
+                        <li class="uk-active">
+
+                            <div class="uk-grid" data-uk-grid-margin>
+                                {% for item in items %}
+                                <div class="uk-width-medium-1-3">
+                                    <a class="uk-thumbnail uk-overlay-toggle" href="/item/{{ item.id }}">
+                                        <div class="uk-overlay">
+                                            <img width="600" height="400" src="/static/{{ item.picture }}" alt="">
+                                            <div class="uk-overlay-area">
+                                                <div class="uk-overlay-area-content"><i class="uk-icon-large uk-icon-bicycle"></i></div>
+                                            </div>
+                                            <div class="uk-overlay-caption">Click to view item</div>
+                                        </div>
+                                        <div class="uk-thumbnail-caption">{{ item.name }}</div>
+                                    </a>
+                                </div>
+                                {% endfor %}
+
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+{% endblock %}

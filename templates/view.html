@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block title %}{{ item.name }}: buy now!{% endblock %}
+
+{% block content %}
+
+<div class="uk-grid" data-uk-grid-margin>
+    <div class="uk-width-medium-3-4">
+
+        <article class="uk-article">
+
+            <h1 class="uk-article-title">
+                {{ item.name }}
+            </h1>
+
+            <p class="uk-article-meta">Views count: <span class="uk-badge uk-badge-notification">{{ item.views_count }}</span></p>
+
+            <p>
+                <a href="#" data-uk-modal="{target:'#modal-big-picture'}"><img width="600" height="400" src="/static/{{ item.picture }}" alt=""></a>
+            </p>
+
+
+            <h2>{{ item.price }} UAH</h2>
+
+            <p>{{ item.desc }}</p>
+
+            <p class="uk-text-center">
+                <a id="add-to-cart" class="uk-button uk-button-primary uk-button-large uk-width-1-2 uk-container-center" href="#" data-uk-modal="{target:'#to-cart'}">Buy!</a>
+            </p>
+
+            <div id="modal-big-picture" class="uk-modal">
+                <div class="uk-modal-dialog uk-modal-dialog-frameless">
+                    <a href="" class="uk-modal-close uk-close uk-close-alt"></a>
+                    <img width="600" height="400" src="/static/{{ item.picture }}" alt="">
+                </div>
+            </div>
+
+            <div id="to-cart" class="uk-modal uk-open">
+                <div class="uk-modal-dialog">
+                    <a href="" class="uk-modal-close uk-close"></a>
+                    <h1>Item has been added to your cart</h1>
+                    <p>Go to your cart now for purchase</p>
+
+                    <a class="uk-button uk-button-primary" href="/cart/">Go to cart</a>
+                </div>
+            </div>
+        </article>
+
+                {# First row of additional items #}
+                <h3>With this product also buy</h3>
+                <div class="uk-grid">
+
+                    {% for item in bought_with_me %}
+                    <div class="uk-width-1-2 uk-width-medium-1-3 uk-width-large-1-6">
+                         <a class="uk-overlay" href="/item/{{ item.id }}">
+                            <img width="350" height="150" src="/static/{{ item.picture }}"  alt="">
+                            <div class="uk-overlay-area">
+                                <div class="uk-overlay-area-content">{{ item.name }}</div>
+                            </div>
+                        </a>
+                    </div>
+                    {% empty %}
+                        <p>There are no such a related items yet</p>
+                    {% endfor %}
+
+                </div>
+
+                {# Second row of additional items #}
+                <h3>These products are viewed with current one</h3>
+                <div class="uk-grid">
+
+                    {% for item in viewed_with_me %}
+                    <div class="uk-width-1-2 uk-width-medium-1-3 uk-width-large-1-6">
+                         <a class="uk-overlay" href="/item/{{ item.id }}">
+                            <img width="350" height="150" src="/static/{{ item.picture }}"  alt="">
+                            <div class="uk-overlay-area">
+                                <div class="uk-overlay-area-content">{{ item.name }}</div>
+                            </div>
+                        </a>
+                    </div>
+                    {% empty %}
+                        <p>There are no such a related items yet</p>
+                    {% endfor %}
+
+                </div>
+
+
+                {# Third row of additional items #}
+                <h3>Products that are often in cart with this product</h3>
+                <div class="uk-grid">
+
+                    {% for item in in_cart_with_me %}
+                    <div class="uk-width-1-2 uk-width-medium-1-3 uk-width-large-1-6">
+                         <a class="uk-overlay" href="/item/{{ item.id }}">
+                            <img width="350" height="150" src="/static/{{ item.picture }}"  alt="">
+                            <div class="uk-overlay-area">
+                                <div class="uk-overlay-area-content">{{ item.name }}</div>
+                            </div>
+                        </a>
+                    </div>
+                    {% empty %}
+                        <p>There are no such a related items yet</p>
+                    {% endfor %}
+
+                </div>
+
+    </div>
+
+    <div class="uk-width-medium-1-4">
+        <div class="uk-panel uk-panel-box uk-panel-box-secondary">
+
+            <h3 class="uk-panel-title uk-text-center">Our Team</h3>
+
+            <p class="uk-text-center">We are open for job offers</p>
+            <div class="uk-text-center">
+                <div class="uk-thumbnail uk-overlay-toggle uk-border-circle">
+                    <div class="uk-overlay">
+                        <img class="uk-border-circle" width="150" height="150" src="/static/images/misha.jpg" alt="">
+                        <div class="uk-overlay-area uk-border-circle">
+                            <div class="uk-overlay-area-content">
+                                <a href="mailto:bmwant@gmail.com" class="uk-icon-button uk-icon-envelope"></a>
+                                <a href="https://plus.google.com/+MishaBehersky" target="_blank" class="uk-icon-button uk-icon-google-plus"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="uk-margin-bottom-remove uk-margin-top-remove">Misha Behersky</h2>
+                <p class="uk-text-large uk-margin-top-remove uk-text-muted">Nike fan</p>
+            </div>
+
+            <div class="uk-text-center">
+                <div class="uk-thumbnail uk-overlay-toggle uk-border-circle">
+                    <div class="uk-overlay">
+                        <img class="uk-border-circle" width="150" height="150" src="/static/images/vlad.jpg" alt="">
+                        <div class="uk-overlay-area uk-border-circle">
+                            <div class="uk-overlay-area-content">
+                                <a href="mailto:imressed@gmail.com" class="uk-icon-button uk-icon-envelope"></a>
+                                <a href="https://plus.google.com/+VladyslavZaika" target="_blank" class="uk-icon-button uk-icon-google-plus"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="uk-margin-bottom-remove uk-margin-top-remove">Vlad Zayka</h2>
+                <p class="uk-text-large uk-margin-top-remove uk-text-muted">Hockey player</p>
+            </div>
+
+            <div class="uk-text-center">
+                <div class="uk-thumbnail uk-overlay-toggle uk-border-circle">
+                    <div class="uk-overlay">
+                        <img class="uk-border-circle" width="150" height="150" src="/static/images/viach.jpg" alt="">
+                        <div class="uk-overlay-area uk-border-circle">
+                            <div class="uk-overlay-area-content">
+                                <a href="mailto:imressed@gmail.com" class="uk-icon-button uk-icon-envelope"></a>
+                                <a href="https://plus.google.com/115877030047435834774" target="_blank" class="uk-icon-button uk-icon-google-plus"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="uk-margin-bottom-remove uk-margin-top-remove">Viach Kakovsky</h2>
+                <p class="uk-text-large uk-margin-top-remove uk-text-muted">Bodybuilder</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script>
+    $(document).ready(function () {
+
+        $("#add-to-cart").click(function () {
+            $.ajax({
+                type: "get",
+                url: "/item/add/{{ item.id }}",
+                dataType: "json"
+            }).done(function(data) {
+                // change cart value
+                $("#cart-count").text(data);
+            });
+        });
+    });
+    </script>
+{% endblock %}

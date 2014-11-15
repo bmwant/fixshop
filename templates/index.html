@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block navigation %}
+    {% include "navigation.html" with menu_item='frontpage'%}
+{% endblock %}
+
+{% block content %}
+            <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-medium-1-1">
+
+                    <div class="uk-vertical-align uk-text-center" style="background: url('/static/images/index_image.jpeg') 50% -100px no-repeat; height: 450px;">
+                        <div class="uk-vertical-align-middle uk-width-1-2">
+                            <h1 class="uk-heading-large">Bikes store</h1>
+                            <p class="uk-text-large">The best internet shop in Ukraine of fixed cycles</p>
+                            <p>
+                                <a class="uk-button uk-button-primary uk-button-large" href="/catalog/">Goat catalog</a>
+                                <a class="uk-button uk-button-large" href="http://elife.in.ua/" target="_blank">Go to original store</a>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <hr class="uk-grid-divider">
+
+            <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-medium-1-1">
+                    <div class="uk-panel uk-panel-box uk-text-center">
+                        <p>Designed with <i class="uk-icon-heart" style="color: #d32c46"></i> at <strong>sq team</strong></p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+{% endblock %}

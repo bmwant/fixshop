@@ -1,0 +1,106 @@
+
+{% extends "base.html" %}
+
+{% block navigation %}
+    {% include "navigation.html" with menu_item='cart'%}
+{% endblock %}
+
+{% block content %}
+
+    {% if items %}
+    <div class="uk-grid">
+        <div class="uk-width-3-4">
+
+            <table class="uk-table uk-table-striped uk-table-condensed uk-text-nowrap">
+                <thead>
+                    <tr>
+                        <th>Item name</th>
+                        <th>Picture</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tfoot>
+
+                    <tr>
+                        <td>Total</td>
+                        <td></td>
+                        <td>{{ total_sum }}</td>
+                    </tr>
+
+                </tfoot>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+
+                        <td><a href="/item/{{ item.id }}">{{ item.name }}</a></td>
+                        <td><img width="50" src="/static/{{ item.picture }}"  alt="" /></td>
+                        <td>{{ item.price }}</td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <a class="uk-button uk-button-danger uk-button-small uk-float-right" href="/cart/clear">Clear cart</a>
+        </div>
+    </div>
+
+    <div class="uk-grid">
+        <div class="uk-width-3-4">
+            <form id="checkout-form" class="uk-form" action="">
+
+                <fieldset data-uk-margin>
+                    <legend>Order items</legend>
+                    <input type="text" placeholder="Enter your name" required="true">
+                    <input type="text" placeholder="097 666 55 44" required="">
+
+                    <button id="checkout" class="uk-button uk-button-success">Checkout</button>
+                </fieldset>
+
+            </form>
+        </div>
+
+        <div id="checkout-modal" class="uk-modal uk-open">
+            <div class="uk-modal-dialog">
+                <a href="" class="uk-modal-close uk-close"></a>
+                <h1>Successful</h1>
+                <p>Thank you for the purchase</p>
+            </div>
+        </div>
+
+    </div>
+    {% else %}
+    <h2>Cart is empty</h2>
+    <p>Go back to catalog and buy something new</p>
+    <a href="/catalog/">View bikes</a>
+    {% endif %}
+
+{% endblock %}
+
+{% block bottom_scripts %}
+    <script>
+    $(document).ready(function () {
+
+        $('#checkout-modal').on({
+
+            'uk.modal.hide': function() {
+                window.location = "/cart/";
+            }
+        });
+
+        $('#checkout-form').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                    type: "get",
+                    url: "/cart/checkout/",
+                    dataType: "json"
+                }).done(function(data) {
+                    // change cart value
+                    console.log(data);
+                });
+            var modal = $.UIkit.modal("#checkout-modal");
+            modal.show();
+        });
+    });
+    </script>
+{% endblock %}

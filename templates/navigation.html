@@ -1,0 +1,22 @@
+{% load helpers %}
+<nav class="uk-navbar uk-margin-large-bottom">
+
+    <a class="uk-navbar-brand" href="/">Elife</a>
+
+    <ul class="uk-navbar-nav">
+
+        <li class="{% if menu_item == 'bikes' %}uk-active{% endif %}">
+            <a href="/catalog">Bikes</a>
+        </li>
+
+    </ul>
+
+    <ul class="uk-navbar-flip uk-navbar-nav">
+        <li class="{% if menu_item == 'cart' %}uk-active{% endif %}">
+            <a href="/cart"><i
+                    class="uk-icon-medium uk-icon-shopping-cart"></i> Cart
+                (<span id="cart-count">{{ cart.items|count }}</span>)</a>
+        </li>
+    </ul>
+
+</nav>
